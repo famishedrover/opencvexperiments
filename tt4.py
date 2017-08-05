@@ -5,6 +5,10 @@ from matplotlib import pyplot as plt
 BLUE_BGR = [255,0,0]
 img1 = cv2.imread('opencv_logo.png')
 
+# img1[img1[:,: ,0] == 255] = 0
+# img1[img1[:,: ,2] == 255] = 0
+# img1[img1[:,: ,1] == 255] = 0
+
 
 img1 = cv2.cvtColor(img1 , cv2.COLOR_RGB2BGR)
 BLUE_RGB = [BLUE_BGR[2] , BLUE_BGR[1] , BLUE_BGR[0]]
