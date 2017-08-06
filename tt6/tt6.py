@@ -46,9 +46,9 @@ while(1) :
 
 
 	cv2.imshow('Result',res)
-	cv2.imshow('Blue' , res_blue)
-	cv2.imshow('Green' , res_green)
-	cv2.imshow('Red' , res_red)
+	# cv2.imshow('Blue' , res_blue)
+	# cv2.imshow('Green' , res_green)
+	# cv2.imshow('Red' , res_red)
 
 	k=cv2.waitKey(5) & 0xFF
 	if k==27 :
