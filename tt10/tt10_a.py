@@ -12,13 +12,20 @@ def nothing (x):
 
 
 
-
 kernel = np.ones((5,5) , np.uint8)
 
-sample_color = np.ones((100,100,3),np.uint8)
 
-# print sample_color
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT , (5,5))
+print ('MORPH_RECT\n',kernel)
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE , (5,5))
+print ('MORPH_ELLIPSE\n',kernel)
+kernel =cv2.getStructuringElement(cv2.MORPH_CROSS , (5,5))
+print ('MORPH_CROSS\n',kernel)
+
+
+# DEFAULT_BGR_VALUES
 B,G,R = 255,0,0
+sample_color = np.ones((100,100,3),np.uint8)
 cv2.namedWindow('Trackbar')
 cv2.createTrackbar('B' , 'Trackbar' , B, 255 , nothing)
 cv2.createTrackbar('G' , 'Trackbar' , G, 255 , nothing)
@@ -43,11 +50,18 @@ while (1) :
 
 	opening  = cv2.morphologyEx(mask , cv2.MORPH_OPEN , kernel)
 	closing = cv2.morphologyEx(mask, cv2.MORPH_CLOSE , kernel)
-	result = cv2.bitwise_and(frame , frame , mask = closing)
+# input - opening(input)
+	tophat = cv2.morphologyEx(mask , cv2.MORPH_TOPHAT , kernel)
+	# input - closing(input)
+	blackhat = cv2.morphologyEx(mask , cv2.MORPH_BLACKHAT , kernel)
+	# dilation - erosion
+	gradient = cv2.morphologyEx(mask , cv2.MORPH_GRADIENT , kernel)
+
+	result = cv2.bitwise_and(frame , frame , mask = blackhat)
 
 
 	cv2.imshow('Trackbar' , sample_color)
-	cv2.imshow('closing' , closing)
+	cv2.imshow('gradient' , gradient)
 	txt = 'R:'+str(R)+' '+'G:'+str(G)+' '+'B:'+str(B)
 	cv2.putText(result,(txt),(int(w_width/4),int(w_height/4)), font, 1,((R+150)%256,(G+150)%256,(B+150)%256),2)
 	cv2.imshow('result' , result)
