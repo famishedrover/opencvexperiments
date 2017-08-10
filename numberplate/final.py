@@ -71,7 +71,7 @@ def working(image):
 
   	# cv2.imshow('final_img' , final_img)
   	# cv2.imshow('final___img',img)
-  	cv2.imshow('final' , img)
+  	cv2.imshow('final' , dst)
 
 
 
@@ -79,7 +79,7 @@ def working(image):
   	cv2.destroyAllWindows()
 
 
-for i in range(1,6):
+for i in range(1,7):
 	working('./passed/test'+str(i)+'.jpg')
 
 # working('russian.jpg')
