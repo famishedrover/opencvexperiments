@@ -70,7 +70,7 @@ def working(image):
 
 
   	# cv2.imshow('final_img' , final_img)
-  	# cv2.imshow('final___img',img)
+  	cv2.imshow('final___img',img)
   	cv2.imshow('final' , dst)
 
 
